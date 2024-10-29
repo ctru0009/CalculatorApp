@@ -1,10 +1,8 @@
-﻿using System.Xml.Serialization;
-
-namespace CalculatorApp.DTO
+﻿namespace CalculatorApp.Models
 {
     public class Rootobject
     {
-        public Maths Maths { get; set; }
+        public required Maths Maths { get; set; }
     }
 
 }
