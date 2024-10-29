@@ -1,12 +1,12 @@
 ﻿using System.Xml.Serialization;
 
-namespace CalculatorApp.DTO
+namespace CalculatorApp.Models
 {
     [XmlRoot("Maths")]
     public class Maths
     {
         [XmlElement("Operation")]
-        public List<Operation> Operation { get; set; }
+        public required List<Operation> Operation { get; set; }
     }
 
 }
