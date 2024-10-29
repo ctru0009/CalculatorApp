@@ -1,13 +1,13 @@
 ﻿using System.Xml.Serialization;
 
-namespace CalculatorApp.DTO
+namespace CalculatorApp.Models
 {
     public class Operation
     {
         [XmlAttribute("ID")]
-        public string ID { get; set; }
+        public required string ID { get; set; }
         [XmlElement("Value")]
-        public string[] Value { get; set; }
+        public required string[] Value { get; set; }
     }
 
 }
