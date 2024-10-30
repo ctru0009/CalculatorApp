@@ -1,6 +1,6 @@
-﻿using CalculatorApp.DTO;
-using CalculatorApp.Factories;
+﻿using CalculatorApp.Factories;
 using CalculatorApp.Interfaces;
+using CalculatorApp.Models;
 
 namespace CalculatorApp.Services
 {
@@ -13,12 +13,7 @@ namespace CalculatorApp.Services
             foreach (var operation in rootobject.Maths.Operation)
             {
                 // Get the operation type and values
-                var operationType = operation.ID;
-
-                if (string.IsNullOrEmpty(operationType))
-                {
-                    throw new InvalidOperationException("Invalid operation type");
-                }
+                var operationType = operation.ID ?? throw new InvalidOperationException("Invalid operation type");
 
                 if (operation.Value == null || operation.Value.Length == 0)
                 {
@@ -38,12 +33,7 @@ namespace CalculatorApp.Services
                 }
 
                 // Create the operation instance
-                var operationInstance = OperationFactory.CreateOperation(operationType);
-
-                if (operationInstance == null)
-                {
-                    throw new InvalidOperationException("Invalid operation type");
-                }
+                var operationInstance = OperationFactory.CreateOperation(operationType) ?? throw new InvalidOperationException("Invalid operation type");
 
                 // Compute the result
                 var result = operationInstance.Compute(operationValues);
