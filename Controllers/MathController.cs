@@ -1,19 +1,14 @@
-﻿using CalculatorApp.DTO;
-using CalculatorApp.Interfaces;
+﻿using CalculatorApp.Interfaces;
+using CalculatorApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatorApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MathController : ControllerBase
+    public class MathController(ICalculate calculate) : ControllerBase
     {
-        private readonly ICalculate _calculate;
-
-        public MathController(ICalculate calculate)
-        {
-            _calculate = calculate;
-        }
+        private readonly ICalculate _calculate = calculate;
 
         [HttpPost]
         public IActionResult Post([FromBody] Rootobject rootObject)
@@ -25,17 +20,13 @@ namespace CalculatorApp.Controllers
             }
             catch (Exception e)
             {
-                switch (e)
+                return e switch
                 {
-                    case InvalidOperationException _:
-                        return BadRequest(e.Message);
-                    default:
-                        return StatusCode(500, e.Message);
-                }
+                    InvalidOperationException _ => BadRequest(e.Message),
+                    _ => StatusCode(500, e.Message),
+                };
             }
 
         }
-
-
     }
 }
