@@ -1,4 +1,4 @@
-﻿using CalculatorApp.DTO;
+﻿using CalculatorApp.Models;
 
 namespace CalculatorApp.Interfaces
 {
